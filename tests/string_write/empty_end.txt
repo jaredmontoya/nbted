@@ -1,2 +1,4 @@
 None
+Compound ""
+	End
 End
