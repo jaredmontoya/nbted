@@ -17,6 +17,9 @@ getopts = "0.2"
 tempfile = "3"
 anyhow = "1"
 
+[build-dependencies]
+vergen-git2 = { version = "9" }
+
 [dev-dependencies]
 datatest-stable = "0.3"
 

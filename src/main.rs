@@ -80,8 +80,7 @@ fn run_cmdline() -> Result<i32> {
             "{} {} {}",
             env!("CARGO_PKG_NAME"),
             env!("CARGO_PKG_VERSION"),
-            // See build.rs for the git-revision.txt file
-            include!(concat!(env!("OUT_DIR"), "/git-revision.txt"))
+            env!("VERGEN_GIT_SHA"),
         );
         println!("https://github.com/C4K3/nbted");
         return Ok(0);
