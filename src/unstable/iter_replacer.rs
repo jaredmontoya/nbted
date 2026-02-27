@@ -1,20 +1,19 @@
 use std::borrow::Borrow;
 use std::collections::VecDeque;
 
-/// An iterator that consumes another iterator and replaces every matching
-/// sequence with a different sequence.
+/// An iterator that consumes another iterator and replaces every matching sequence with a
+/// different sequence.
 ///
-/// Replacer will stop reading from the source iterator once it has received
-/// the first None, otherwise it would not be able to output tails that
-/// are less than the size of the replace pattern.
+/// Replacer will stop reading from the source iterator once it has received the first None
+/// (similar behavior as to Fuse), otherwise it would not be able to output tails that are less
+/// than the size of the replace pattern.
 ///
-/// For example imagine you're replacing [1, 2, 3], and the input is
-/// [1, 2, 3, 1, 2]. Since Replacer would get a None from the source stream
-/// after the 2, it wouldn't know if it should output [1, 2] or wait until
-/// it gets the next value from the source. By closing the input source
-/// once it has received a None, Replacer will know that the [1, 2] are
-/// NOT an incomplete [1, 2, 3] pattern and it will be able to return
-/// the [1, 2] immediately (maybe this behavior should be made configurable?)
+/// For example imagine you're replacing [1, 2, 3], and the input is [1, 2, 3, 1, 2]. Since
+/// Replacer would get a None from the source stream after the second 2, it wouldn't know if it
+/// should output [1, 2] or wait until it gets the next value from the source. By closing the input
+/// source once it has received a None, Replacer will know that the [1, 2] are NOT an incomplete
+/// [1, 2, 3] pattern and it will be able to return the [1, 2] immediately (maybe this behavior
+/// should be made configurable?)
 pub struct Replacer<'a, I, A, B>
 where
     I: Iterator,
@@ -53,11 +52,14 @@ where
             None => return,
         };
         while self.q.len() < self.a.len() {
-            if let Some(x) = iter.next() {
-                self.q.push_back(x.borrow().to_owned());
-            } else {
-                self.iter = None;
-                return;
+            match iter.next() {
+                Some(x) => {
+                    self.q.push_back(x.borrow().to_owned());
+                }
+                _ => {
+                    self.iter = None;
+                    return;
+                }
             }
         }
     }

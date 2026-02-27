@@ -1,17 +1,17 @@
-use nbted::unstable::{data, read, string_read, string_write, write};
 use nbted::Result;
+use nbted::unstable::{data, read, string_read, string_write, write};
 
 use std::env;
 use std::fs::File;
 use std::io;
 use std::io::{BufReader, BufWriter};
 use std::path::Path;
-use std::process::exit;
 use std::process::Command;
+use std::process::exit;
 
 use getopts::Options;
 
-use anyhow::{bail, format_err, Context};
+use anyhow::{Context, bail, format_err};
 
 fn main() {
     match run_cmdline() {

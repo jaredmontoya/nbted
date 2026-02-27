@@ -1,6 +1,6 @@
-use crate::data::{NBTFile, NBT};
-use crate::iter_replacer::ReplacerExt;
 use crate::Result;
+use crate::data::{NBT, NBTFile};
+use crate::iter_replacer::ReplacerExt;
 
 use byteorder::WriteBytesExt;
 

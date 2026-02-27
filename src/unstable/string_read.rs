@@ -1,12 +1,12 @@
-use crate::data::{Compression, NBTFile, NBT};
 use crate::Result;
+use crate::data::{Compression, NBT, NBTFile};
 
 use std::borrow::{Borrow, Cow};
 use std::io::Read;
 use std::iter::Peekable;
 use std::str;
 
-use anyhow::{anyhow, bail, Context};
+use anyhow::{Context, anyhow, bail};
 
 /// A struct for iterating over the tokens in a given file
 ///
@@ -67,7 +67,7 @@ impl<'a> Iterator for Tokens<'a> {
                         return Some(Err(anyhow!(
                             r#"Invalid string, tried to escape the character {} which cannot be escaped (to enter a literal \, write \\)"#,
                             x
-                        )))
+                        )));
                     }
                     x => ret.push(*x),
                 }

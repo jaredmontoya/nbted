@@ -7,8 +7,8 @@
 /// file with its "loops".
 use std::io::Cursor;
 
-use crate::data::NBTFile;
 use crate::Result;
+use crate::data::NBTFile;
 
 /// Convenience method
 fn try_parse_string(original: &str) -> Result<NBTFile> {
